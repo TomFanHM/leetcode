@@ -1,11 +1,42 @@
 ---
+import Card from "../../components/Card";
 import Layout from "../../layout/Layout.astro";
 
 const title = "Articles";
 const description = "Latest articles.";
-const permalink = `${Astro.site.href}articles`;
+const permalink = `${Astro.url.href}articles`;
+
+const posts = await Astro.glob("../../articles/*.md");
+const sortedPosts = posts.sort(
+  (a, b) =>
+    new Date(b.frontmatter.date).getTime() -
+    new Date(a.frontmatter.date).getTime()
+);
 ---
 
 <Layout title={title} description={description} permalink={permalink}>
-    
+  <div class="container mx-auto px-4 py-10 md:py-20">
+    <h1 class="text-5xl font-bold">Articles</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-12 justify-items-center py-10 md:py-20">
+      {
+        sortedPosts.map((post, index) => {
+          // @ts-ignore: Object is possibly 'null'.
+          const href = `/articles/${post.file
+            .split("/")
+            .pop()
+            .split(".")
+            .shift()}`;
+          return (
+            <Card
+              image={post.frontmatter.image.src}
+              imageAlt={post.frontmatter.image.alt}
+              title={post.frontmatter.title}
+              description={post.frontmatter.description}
+              category={post.frontmatter.category}
+            />
+          );
+        })
+      }
+    </div>
+  </div>
 </Layout>

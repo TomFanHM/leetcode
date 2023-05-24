@@ -4,7 +4,7 @@ import Layout from "../layout/Layout.astro";
 const title = "Donate";
 const description =
   "If you enjoy my blog and find my content helpful, please consider buying me a coffee to show your support! Your donation will help me continue to create and share valuable insights on a variety of topics. Thank you for your generosity!";
-  const permalink = `${Astro.site.href}donate`;
+  const permalink = `${Astro.url.href}donate`;
 ---
 
 <Layout title={title} description={description} permalink={permalink} />
