@@ -4,7 +4,7 @@ import Layout from "../../layout/Layout.astro";
 
 const title = "Articles";
 const description = "Latest articles.";
-const permalink = `${Astro.url.href}articles`;
+const permalink = Astro.url.href;
 
 const posts = await Astro.glob("../../articles/*.md");
 const sortedPosts = posts.sort(
@@ -17,7 +17,9 @@ const sortedPosts = posts.sort(
 <Layout title={title} description={description} permalink={permalink}>
   <div class="container mx-auto px-4 py-10 md:py-20">
     <h1 class="text-5xl font-bold">Articles</h1>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-12 justify-items-center py-10 md:py-20">
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-12 justify-items-center py-10 md:py-20"
+    >
       {
         sortedPosts.map((post, index) => {
           // @ts-ignore: Object is possibly 'null'.

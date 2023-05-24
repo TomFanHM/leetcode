@@ -1,10 +1,11 @@
 ---
-import Hero from "../components/Hero";
+import Hero from "../components/Hero.astro";
 import Layout from "../layout/Layout.astro";
 
 const title = "My Leetcode Blog";
-const description = "Discovering the optimal approach to a problem can be an enjoyable quest.";
-const permalink = Astro.url.href
+const description =
+  "Discovering the optimal approach to a problem can be an enjoyable quest.";
+const permalink = Astro.url.href;
 
 const twoSumBetterCode = `
   const twoSum = (nums: number[], target: number) => {
@@ -81,7 +82,7 @@ const firstMissingPositiveBetterCode = `
 <Layout title={title} description={description} permalink={permalink}>
   <Hero />
   <div class="container mx-auto px-4 py-10 md:py-20">
-    <h1 class="text-3xl font-bold text-center mt-12 md:mt-24">
+    <h1 class="text-3xl font-bold mt-12 md:mt-24 text-center">
       Discovering the optimal approach to a problem can be an enjoyable quest.
     </h1>
     <!-- Two Sum -->
@@ -91,7 +92,7 @@ const firstMissingPositiveBetterCode = `
         Given an array of integers nums and an integer target, return indices of
         the two numbers such that they add up to target.
       </p>
-      <div class="flex flex-col w-full lg:flex-row justify-center">
+      <div class="flex flex-col w-full lg:flex-row lg:justify-center">
         <div class="mockup-code flex-grow lg:max-w-md">
           <pre class="language-javascript"><code>{twoSumBadCode}</code></pre>
         </div>
@@ -108,7 +109,7 @@ const firstMissingPositiveBetterCode = `
         Given an unsorted integer array nums, return the smallest missing
         positive integer.
       </p>
-      <div class="flex flex-col w-full lg:flex-row justify-center">
+      <div class="flex flex-col w-full lg:flex-row lg:justify-center">
         <div class="mockup-code flex-grow lg:max-w-md">
           <pre
             class="language-javascript"><code>{firstMissingPositiveBetterCode}</code></pre>
