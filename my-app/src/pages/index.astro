@@ -1,15 +1,117 @@
 ---
+import Hero from "../components/Hero";
+import Layout from "../layout/Layout.astro";
+
+const twoSumBetterCode = `
+  const twoSum = (nums: number[], target: number) => {
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+      const complement = target - nums[i];
+      if (map.has(complement)) {
+        return [map.get(complement), i];
+      }
+      map.set(nums[i], i);
+    }
+  };
+`;
+
+const twoSumBadCode = `
+  const twoSum = (nums: number[], target: number) => {
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+        if (nums[i] + nums[j] === target) return [i, j];
+      }
+    }
+  };
+`;
+
+const firstMissingPositiveBadCode = `
+  const firstMissingPositive = (nums: number[]) => {
+    const sorted: number[] = nums.sort((a: number, b: number) => a - b);
+    let count = 1;
+    let i = 0;
+
+    while (i < sorted.length) {
+      if (sorted[i] === count) {
+        i++;
+        count++;
+      } else if (sorted[i] < count) {
+        i++;
+      } else {
+        return count;
+      }
+    }
+
+    return count;
+  };
+`;
+
+const firstMissingPositiveBetterCode = `
+  const firstMissingPositive = (nums: number[]) => {
+    let j = 0;
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] <= 0) {
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+        j++;
+      }
+    }
+
+    for (let i = j; i < nums.length; i++) {
+      const index = Math.abs(nums[i]) - 1 + j;
+      if (index < nums.length && nums[index] > 0) {
+        nums[index] = -nums[index];
+      }
+    }
+
+    for (let i = j; i < nums.length; i++) {
+      if (nums[i] > 0) {
+        return i - j + 1;
+      }
+    }
+
+    return nums.length - j + 1;
+  };
+`;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Hero />
+  <div class="container mx-auto py-20 px-4">
+    <!-- Two Sum -->
+    <div class="flex flex-col items-center my-12">
+      <h1 class="text-xl font-bold">Two Sum</h1>
+      <p class="py-6">
+        Given an array of integers nums and an integer target, return indices of
+        the two numbers such that they add up to target.
+      </p>
+      <div class="flex flex-col w-full lg:flex-row justify-center">
+        <div class="mockup-code flex-grow lg:max-w-md">
+          <pre class="language-javascript"><code>{twoSumBadCode}</code></pre>
+        </div>
+        <div class="divider lg:divider-horizontal">OR</div>
+        <div class="mockup-code flex-grow lg:max-w-md">
+          <pre class="language-javascript"><code>{twoSumBetterCode}</code></pre>
+        </div>
+      </div>
+    </div>
+    <!-- First Missing Positive -->
+    <div class="flex flex-col items-center my-12">
+      <h1 class="text-xl font-bold">First Missing Positive</h1>
+      <p class="py-6">
+        Given an unsorted integer array nums, return the smallest missing
+        positive integer.
+      </p>
+      <div class="flex flex-col w-full lg:flex-row justify-center">
+        <div class="mockup-code flex-grow lg:max-w-md">
+          <pre
+            class="language-javascript"><code>{firstMissingPositiveBetterCode}</code></pre>
+        </div>
+        <div class="divider lg:divider-horizontal">OR</div>
+        <div class="mockup-code flex-grow lg:max-w-md">
+          <pre
+            class="language-javascript"><code>{firstMissingPositiveBadCode}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

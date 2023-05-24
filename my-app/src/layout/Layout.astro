@@ -1,0 +1,62 @@
+---
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+---
+
+<html lang="en" data-theme="night">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Primary Keyword - Secondary Keyword | Brand Name</title>
+    <meta
+      name="description"
+      content="A captivating 155-character summary of your page content, featuring the primary and secondary keywords."
+    />
+    <meta
+      name="keywords"
+      content="primary keyword, secondary keyword, related keyword"
+    />
+    <link rel="canonical" href="https://www.example.com/canonical-url" />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Primary Keyword - Secondary Keyword | Brand Name"
+    />
+    <meta
+      property="og:description"
+      content="A captivating 155-character summary of your page content, featuring the primary and secondary keywords."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.example.com/page-url" />
+    <meta
+      property="og:image"
+      content="https://www.example.com/path-to-image.jpg"
+    />
+    <meta property="og:site_name" content="Brand Name" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Primary Keyword - Secondary Keyword | Brand Name"
+    />
+    <meta
+      name="twitter:description"
+      content="A captivating 155-character summary of your page content, featuring the primary and secondary keywords."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.example.com/path-to-image.jpg"
+    />
+    <meta name="twitter:site" content="@TwitterHandle" />
+    <meta name="twitter:creator" content="@TwitterHandle" />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
