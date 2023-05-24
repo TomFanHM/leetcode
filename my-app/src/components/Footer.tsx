@@ -1,4 +1,5 @@
-import { BsTwitter, BsYoutube, BsFacebook } from "react-icons/bs";
+import pkg from 'react-icons/bs';
+const { BsTwitter, BsYoutube, BsFacebook } = pkg;
 
 export default function Footer() {
   return (

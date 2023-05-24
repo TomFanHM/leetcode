@@ -3,9 +3,5 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "target": "ES2016",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
   }
 }

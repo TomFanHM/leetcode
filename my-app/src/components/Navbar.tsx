@@ -1,5 +1,8 @@
-import { HiMenuAlt1 } from "react-icons/hi";
-import { MdNotificationsNone, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import pkg_hi from 'react-icons/hi';
+import pkg_md from 'react-icons/md';
+
+const { HiMenuAlt1 } = pkg_hi;
+const { MdNotificationsNone, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } = pkg_md
 
 export default function Navbar() {
   return (
@@ -22,7 +25,7 @@ export default function Navbar() {
             <li tabIndex={0}>
               <a className="justify-between">
                 Articles
-                <MdOutlineKeyboardArrowRight size={24}/>
+                <MdOutlineKeyboardArrowRight size={24} />
               </a>
               <ul className="p-2">
                 <li>
@@ -54,7 +57,7 @@ export default function Navbar() {
           <li tabIndex={0}>
             <a>
               Articles
-              <MdOutlineKeyboardArrowDown size={24}/>
+              <MdOutlineKeyboardArrowDown size={24} />
             </a>
             <ul className="p-2">
               <li>
