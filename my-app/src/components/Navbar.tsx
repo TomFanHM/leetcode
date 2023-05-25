@@ -40,7 +40,7 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">Leetcode</a>
+        <a className="btn btn-ghost normal-case text-xl" href="/">Leetcode</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
