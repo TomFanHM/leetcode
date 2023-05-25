@@ -35,6 +35,8 @@ const sortedPosts = posts.sort(
               title={post.frontmatter.title}
               description={post.frontmatter.description}
               category={post.frontmatter.category}
+              date={post.frontmatter.date}
+              href={href}
             />
           );
         })
