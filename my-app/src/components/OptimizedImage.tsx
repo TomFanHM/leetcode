@@ -19,7 +19,7 @@ export default function OptimizedImage(props: OptimizedImageProps) {
   return (
     <img
       src={imageError ? "/fallback.png" : props.src}
-      className={`${props.className} ${imageLoaded ? "filter grayscale" : ""}`}
+      className={`${props.className} ${imageLoaded ? "" : "loading-skeleton"}`}
       loading="lazy"
       onLoad={handleImageLoad}
       onError={handleImageError}
