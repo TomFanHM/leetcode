@@ -1,3 +1,5 @@
+import OptimizedImage from "./OptimizedImage";
+
 const sevenDays = 7 * 24 * 60 * 60 * 1000;
 
 type CardProps = {
@@ -17,7 +19,11 @@ export default function Card(props: CardProps) {
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <figure>
-        <img src={props.image} alt={props.imageAlt} className="object-cover" />
+        <OptimizedImage
+          src={props.image}
+          alt={props.imageAlt}
+          className="object-cover"
+        />
       </figure>
       <a href={props.href}>
         <div className="card-body">

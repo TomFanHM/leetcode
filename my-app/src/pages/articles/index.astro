@@ -37,6 +37,7 @@ const sortedPosts = posts.sort(
               category={post.frontmatter.category}
               date={post.frontmatter.date}
               href={href}
+              client:load
             />
           );
         })
