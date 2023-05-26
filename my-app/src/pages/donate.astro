@@ -1,4 +1,5 @@
 ---
+import OptimizedImage from "../components/OptimizedImage";
 import Layout from "../layout/Layout.astro";
 
 const title = "Donate";
@@ -10,5 +11,23 @@ const permalink = Astro.url.href;
 <Layout title={title} description={description} permalink={permalink}>
   <div class="container mx-auto px-4 py-10 md:py-20 min-h-screen">
     <h1 class="text-5xl font-bold max-w-lg mx-auto">Donate</h1>
+    <div
+      class="flex flex-col my-12 md:my-24 max-w-lg mx-auto justify-center items-center"
+    >
+      <OptimizedImage
+        src="/assets/qrcode.png"
+        className="w-full max-w-sm rounded-lg shadow-2xl mb-8"
+        alt="banner"
+        client:load
+      />
+      <p class="text-lg leading-normal mb-8">
+        If you've found my contents useful and would like to show your
+        appreciation, I would be delighted if you could donate me a coffee.
+      </p>
+      <p class="text-lg leading-normal mb-8">
+        Your support would help me continue to create more quality content in
+        the future.
+      </p>
+    </div>
   </div>
 </Layout>
