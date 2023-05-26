@@ -2,7 +2,7 @@
 title: 3Sum
 date: 2023-05-25
 author: Tom Fan
-image: { src: "/assets/social.png", alt: "an image" }
+image: { src: "https://picsum.photos/id/16/1920/1080", alt: "an image" }
 description: Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 draft: false
 category: Two pointers

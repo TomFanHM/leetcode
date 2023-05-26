@@ -2,7 +2,7 @@
 title: Two Sum
 date: 2023-05-24
 author: Tom Fan
-image: { src: "/assets/social.png", alt: "an image" }
+image: { src: "https://picsum.photos/seed/picsum/1920/1080", alt: "an image" }
 description: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 draft: false
 category: Array
