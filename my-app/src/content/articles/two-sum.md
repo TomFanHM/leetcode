@@ -4,15 +4,13 @@ id: 523001ae
 title: Two Sum
 date: May 24, 2023
 author: Tom Fan
-imageUrl: ../../assets/social.png
+imageUrl: ../../assets/5.png
 description: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 draft: false
 category: Array
 ---
 
-# 1. Two Sum
-
-![image](https://picsum.photos/seed/picsum/1920/1080)
+### Problem
 
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
@@ -20,7 +18,7 @@ You may assume that each input would have exactly one solution, and you may not 
 
 You can return the answer in any order.
 
-### Case 1:
+#### Case 1:
 
 ```
 Input: nums = [2,7,11,15], target = 9
@@ -28,21 +26,23 @@ Output: [0,1]
 Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
 ```
 
-### Case 2:
+#### Case 2:
 
 ```
 Input: nums = [3,2,4], target = 6
 Output: [1,2]
 ```
 
-### Case 3:
+#### Case 3:
 
 ```
 Input: nums = [3,3], target = 6
 Output: [0,1]
 ```
 
-## Brute-force algorithms
+### Solution
+
+- Brute-force algorithms
 
 It uses a nested loop to iterate through each element of the array and check if there is another element in the array that can be added to it to equal the target number.
 
@@ -64,7 +64,7 @@ The time complexity of this function is **O(n^2)**, where n is the length of the
 
 As the size of the input array increases, the number of iterations required by the nested loop increases quadratically, which can make the function very slow for large arrays. Therefore, this algorithm is not the most efficient way to solve the two-sum problem for large input sizes.
 
-## Hash map
+- Hash map
 
 The function uses a hash map to keep track of the previously seen numbers in the array and their indices.
 

@@ -4,13 +4,13 @@ id: 92524ad4
 title: Combination Sum
 date: May 29, 2023
 author: Tom Fan
-imageUrl: ../../assets/social.png
+imageUrl: ../../assets/2.png
 description: Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
 draft: false
 category: Backtracking
 ---
 
-# 39. Combination Sum
+### Problem
 
 Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
 
@@ -20,7 +20,7 @@ of at least one of the chosen numbers is different.
 
 The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
 
-### Case 1
+#### Case 1
 
 ```
 Input: candidates = [2,3,6,7], target = 7
@@ -31,21 +31,23 @@ Explanation:
 These are the only two combinations.
 ```
 
-### Case 2
+#### Case 2
 
 ```
 Input: candidates = [2,3,5], target = 8
 Output: [[2,2,2,2],[2,3,3],[3,5]]
 ```
 
-### Case 3
+#### Case 3
 
 ```
 Input: candidates = [2], target = 1
 Output: []
 ```
 
-## Backtracking algorithm
+### Solution
+
+- Backtracking algorithm
 
 ```typescript
 function combinationSum(candidates: number[], target: number): number[][] {
@@ -82,11 +84,11 @@ Otherwise, a for loop is used to iterate through the candidates array starting f
 
 If the new sum is greater than the target, the loop is broken as it is impossible to form a valid combination.
 
-Otherwise, the current element is added to the arr, and the backtrack function iscalled recursively with the updated start, arr, and newSum values.
+Otherwise, the current element is added to the arr, and the backtrack function is called recursively with the updated start, arr, and newSum values.
 
 After the recursive call returns, the last element is removed from arr using the pop function to backtrack to the previous state and explore other possibilities.
 
-## Why is pop() used?
+#### Why is pop() used?
 
 The arr.pop() method is used to backtrack to the previous state and explore other possibilities.
 

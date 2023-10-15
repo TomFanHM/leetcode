@@ -4,21 +4,19 @@ id: b68cbdf3
 title: 3Sum
 date: May 25, 2023
 author: Tom Fan
-imageUrl: ../../assets/social.png
+imageUrl: ../../assets/4.png
 description: Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 draft: false
 category: Two pointers
 ---
 
-# 15. 3Sum
-
-![image](https://picsum.photos/id/16/1920/1080)
+### Problem
 
 Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 
 Notice that the solution set must not contain duplicate triplets.
 
-### Case 1
+#### Case 1
 
 ```
 Input: nums = [-1,0,1,2,-1,-4]
@@ -31,7 +29,7 @@ The distinct triplets are [-1,0,1] and [-1,-1,2].
 Notice that the order of the output and the order of the triplets does not matter.
 ```
 
-### Case 2
+#### Case 2
 
 ```
 Input: nums = [0,1,1]
@@ -39,7 +37,7 @@ Output: []
 Explanation: The only possible triplet does not sum up to 0.
 ```
 
-### Case 3
+#### Case 3
 
 ```
 Input: nums = [0,0,0]
@@ -47,7 +45,7 @@ Output: [[0,0,0]]
 Explanation: The only possible triplet sums up to 0.
 ```
 
-## Two-pointer
+### Solution
 
 It involves using two pointers to find all unique triplets within the array that add up to zero.
 
