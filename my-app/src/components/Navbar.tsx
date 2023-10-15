@@ -34,9 +34,6 @@ export default function Navbar() {
             <li>
               <a href="/articles/">Articles</a>
             </li>
-            <li>
-              <a href="/resources/">Resources</a>
-            </li>
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-xl" href="/">
