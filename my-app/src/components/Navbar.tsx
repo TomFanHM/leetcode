@@ -41,11 +41,7 @@ export default function Navbar() {
         </div>
         <a className="btn btn-ghost normal-case text-xl" href="/">
           <span className="sr-only">{siteConfig.name}</span>
-          <img
-            className="h-8 w-auto"
-            src={siteConfig.logo}
-            alt={siteConfig.name}
-          />
+          <img className="h-8 w-auto" src={siteConfig.logo} alt="Logo Image" />
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -62,7 +58,11 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle" disabled>
+        <button
+          className="btn btn-ghost btn-circle"
+          disabled
+          aria-label="notification"
+        >
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
