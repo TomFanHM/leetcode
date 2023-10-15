@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://leetcode-one.vercel.app/sitemap-index.xml

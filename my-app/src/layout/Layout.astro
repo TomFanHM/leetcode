@@ -1,14 +1,15 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { siteConfig } from "../config/site";
+import "../styles/global.css";
 
 export interface Props {
-  title: string;
-  description: string;
-  permalink: string;
+  title?: string;
+  description?: string;
 }
-const { title, description, permalink } = Astro.props;
-const socialUrl = Astro.url.href + "assets/social.png";
+const { title, description } = Astro.props;
 ---
 
 <html lang="en" data-theme="night">
@@ -16,30 +17,53 @@ const socialUrl = Astro.url.href + "assets/social.png";
     <!-- Global Metadata -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
+    <title>{title ? `${title} | ${siteConfig.name}` : siteConfig.name}</title>
+    <meta
+      name="title"
+      content={title ? `${title} | ${siteConfig.name}` : siteConfig.name}
+    />
+    <meta name="description" content={description || siteConfig.description} />
     <meta name="keywords" content="Astro, Leetcode, Blog" />
-
+    <!-- Author -->
+    <meta name="author" content={siteConfig.author} />
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={permalink} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialUrl} />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={permalink} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialUrl} />
+    <meta
+      property="og:title"
+      content={title ? `${title} | ${siteConfig.name}` : siteConfig.name}
+    />
+    <meta
+      property="og:description"
+      content={description || siteConfig.description}
+    />
+    <meta property="og:image" content="/images/opengraph-image.png" />
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- Others -->
+    <meta name="generator" content={Astro.generator} />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Astro View Transitions -->
+    <ViewTransitions />
+    <!-- Google Search Console -->
+    <meta
+      name="google-site-verification"
+      content="elI-FypqUlBikmRz3GVGYkb2ESwSidMKXAEg9yiUWPg"
+    />
   </head>
-  <body>
+  <body
+    class="min-h-screen bg-gradient-to-tr from-base-100 to-neutral text-base-content font-sans antialiased"
+  >
     <Navbar />
-    <main>
+    <main class="min-h-screen">
       <slot />
     </main>
     <Footer />

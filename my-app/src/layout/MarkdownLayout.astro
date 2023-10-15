@@ -1,0 +1,42 @@
+---
+// Nothing
+---
+
+<article class="mt-10 prose lg:prose-xl">
+  <slot />
+</article>
+
+<script is:inline>
+function main() {
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+    for (const codeBlock of codeBlocks) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "relative";
+        const copyButton = document.createElement("button");
+        copyButton.className =
+            "absolute top-0 right-0 m-2 btn btn-primary btn-sm";
+        copyButton.innerHTML = "Copy";
+
+        const code = codeBlock.querySelector("code");
+
+        if (code && codeBlock && codeBlock.parentNode) {
+            codeBlock.appendChild(copyButton);
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton.addEventListener("click", async () => {
+                const text = code.innerText;
+                await navigator.clipboard.writeText(text).then(() => {
+                    copyButton.innerText = "Copied";
+
+                    setTimeout(() => {
+                        copyButton.innerText = "Copy";
+                    }, 1000);
+                });
+            });
+        }
+    }
+}
+
+main();
+</script>

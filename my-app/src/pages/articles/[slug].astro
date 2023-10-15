@@ -1,31 +1,23 @@
 ---
+import ContentLayout from "../../layout/ContentLayout.astro";
 import Layout from "../../layout/Layout.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
+
 export async function getStaticPaths() {
-  const posts = await Astro.glob("../../articles/*.md");
-  return posts.map((p) => ({
-    // @ts-ignore: Object is possibly 'null'.
-    params: { slug: p.file.split("/").pop().split(".").shift() },
-    props: { post: p },
+  const docs = await getCollection("articles");
+  return docs.map((doc) => ({
+    params: { slug: doc.slug },
+    props: doc,
   }));
 }
+type Props = CollectionEntry<"articles">;
 
-const { Content, frontmatter } = Astro.props.post;
-const { title, description } = frontmatter;
-const permalink = Astro.url.href;
+const doc = Astro.props;
+const { Content } = await doc.render();
 ---
 
-<Layout title={title} description={description} permalink={permalink}>
-  <div class="container mx-auto">
-    <article
-      class="content px-4 py-10 md:py-20 min-h-screen mx-auto prose lg:prose-xl"
-    >
-      <Content />
-    </article>
-  </div>
+<Layout title={doc.data.title} description={doc.data.description}>
+  <ContentLayout {...doc.data}>
+    <Content />
+  </ContentLayout>
 </Layout>
-
-<style>
-  h1 {
-    color: red !important;
-  }
-</style>

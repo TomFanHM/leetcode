@@ -1,6 +1,8 @@
+import { siteConfig } from "../config/site";
+
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100">
+    <nav className="navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -35,12 +37,16 @@ export default function Navbar() {
             <li>
               <a href="/resources/">Resources</a>
             </li>
-            <li>
-              <a href="/donate/">Donate</a>
-            </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl" href="/">Leetcode</a>
+        <a className="btn btn-ghost normal-case text-xl" href="/">
+          <span className="sr-only">{siteConfig.name}</span>
+          <img
+            className="h-8 w-auto"
+            src={siteConfig.logo}
+            alt={siteConfig.name}
+          />
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -52,12 +58,6 @@ export default function Navbar() {
           </li>
           <li>
             <a href="/articles/">Articles</a>
-          </li>
-          <li>
-            <a href="/resources/">Resources</a>
-          </li>
-          <li>
-            <a href="/donate/">Donate</a>
           </li>
         </ul>
       </div>
@@ -84,6 +84,6 @@ export default function Navbar() {
           </button>
         </a>
       </div>
-    </div>
+    </nav>
   );
 }

@@ -1,0 +1,105 @@
+---
+import Background from "../../components/Background";
+import Layout from "../../layout/Layout.astro";
+import { Image } from "astro:assets";
+import banner from "../../assets/about.png";
+
+const heading = "About";
+const description =
+  "Tom Fan's LeetCode is my initiative to document my journey as I solve Leetcode problems. This initiative isn't solely for my benefit, but also to share my insights and knowledge with others. My goal is to transform this blog into a valuable resource for fellow coders, thereby inspiring them to approach problem-solving with both enthusiasm and a solid grasp of the underlying concepts.";
+const timeline = [
+  {
+    name: "Started Coding Journey",
+    description:
+      "Started my journey into the world of coding and discovered my passion for it.",
+    date: "April 2022",
+    dateTime: "2022-04",
+  },
+  {
+    name: "Started Tom Fan's LeetCode Blog",
+    description:
+      "Started the Tom Fan's LeetCode blog to document my solutions to coding problems and share my knowledge with others.",
+    date: "May 2023",
+    dateTime: "2023-05",
+  },
+  {
+    name: "Enrolled in Bachelor's Program",
+    description:
+      "Enrolled in a Bachelor of Science program in Information Systems and Web Technologies.",
+    date: "Sep 2023",
+    dateTime: "2023-09",
+  },
+  {
+    name: "Current Date",
+    description: "Continuing my journey, learning, and sharing.",
+    date: "Oct 2023",
+    dateTime: "2023-10",
+  },
+];
+---
+
+<Layout title={heading} description={description}>
+  <div class="isolate">
+    <div class="relative isolate overflow-hidden pt-14">
+      <Background />
+      <div class="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
+        <div
+          class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8"
+        >
+          <h1
+            class="max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl lg:col-span-2 xl:col-auto"
+          >
+            Meet the Mind Behind Tom Fan's LeetCode
+          </h1>
+          <div class="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
+            <p class="text-lg leading-8 text-base-content/70">
+              I'm a Bachelor of Science student majoring in Information Systems
+              and Web Technologies. In addition, I'm a frontend developer and a
+              coding game enthusiast with a strong interest in TypeScript. Tom
+              Fan's LeetCode is my initiative to document my journey as I solve
+              Leetcode problems. This initiative isn't solely for my benefit,
+              but also to share my insights and knowledge with others. My goal
+              is to transform this blog into a valuable resource for fellow
+              coders, thereby inspiring them to approach problem-solving with
+              both enthusiasm and a solid grasp of the underlying concepts.
+            </p>
+          </div>
+          <Image
+            src={banner}
+            alt="Leetcode Blog About Page Banner Image"
+            class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 pb-32">
+      <div
+        class="mx-auto grid max-w-2xl grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:max-w-none lg:grid-cols-4"
+      >
+        {
+          timeline.map((item) => (
+            <div>
+              <time class="flex items-center text-sm font-semibold leading-6 text-accent">
+                <svg
+                  viewBox="0 0 4 4"
+                  class="mr-4 h-1 w-1 flex-none"
+                  aria-hidden="true"
+                >
+                  <circle cx={2} cy={2} r={2} fill="currentColor" />
+                </svg>
+                {item.date}
+              </time>
+              <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-base-content">
+                {item.name}
+              </p>
+              <p class="mt-1 text-base leading-7 text-base-content/70">
+                {item.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

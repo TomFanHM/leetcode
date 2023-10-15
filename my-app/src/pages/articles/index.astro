@@ -1,47 +1,38 @@
 ---
-import Card from "../../components/Card";
+import Card from "../../components/Card.astro";
 import Layout from "../../layout/Layout.astro";
+import { getCollection } from "astro:content";
 
-const title = "Articles";
-const description = "Latest articles.";
-const permalink = Astro.url.href;
+const heading = "Articles";
+const description =
+  "Browse through my collection of articles, each a step in my journey through various coding problems. My aim is to present my solutions and learning experiences in a way that's relatable and easy to understand.";
 
-const posts = await Astro.glob("../../articles/*.md");
-const sortedPosts = posts.sort(
-  (a, b) =>
-    new Date(b.frontmatter.date).getTime() -
-    new Date(a.frontmatter.date).getTime()
-);
+const docs = await getCollection("articles");
+const data = docs.map((el, i) => ({
+  id: el.data.id,
+  href: "/articles/" + el.slug,
+  title: el.data.title,
+  description: el.data.description,
+  imageUrl: el.data.imageUrl,
+  date: el.data.date,
+  category: el.data.category,
+}));
 ---
 
-<Layout title={title} description={description} permalink={permalink}>
-  <div class="container mx-auto px-4 py-10 md:py-20">
-    <h1 class="text-5xl font-bold">Articles</h1>
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-12 justify-items-center py-10 md:py-20"
-    >
-      {
-        sortedPosts.map((post, index) => {
-          // @ts-ignore: Object is possibly 'null'.
-          const href = `/articles/${post.file
-            .split("/")
-            .pop()
-            .split(".")
-            .shift()}`;
-          return (
-            <Card
-              image={post.frontmatter.image.src}
-              imageAlt={post.frontmatter.image.alt}
-              title={post.frontmatter.title}
-              description={post.frontmatter.description}
-              category={post.frontmatter.category}
-              date={post.frontmatter.date}
-              href={href}
-              client:load
-            />
-          );
-        })
-      }
+<Layout title={heading} description={description}>
+  <div class="py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl lg:mx-0">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+          {heading}
+        </h2>
+        <p class="mt-2 text-lg leading-8 text-base-content/70">{description}</p>
+      </div>
+      <div
+        class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-base-content/50 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+      >
+        {data.map((doc, i) => <Card {...doc} />)}
+      </div>
     </div>
   </div>
 </Layout>

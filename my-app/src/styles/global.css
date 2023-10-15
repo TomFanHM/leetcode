@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* https://stackoverflow.com/questions/22252472/how-can-i-change-the-color-of-an-svg-element/53336754#53336754 */
+.filter-svg {
+  filter: invert(80%) sepia(11%) saturate(782%) hue-rotate(186deg)
+    brightness(96%) contrast(95%);
+}

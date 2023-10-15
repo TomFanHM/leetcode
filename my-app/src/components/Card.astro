@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import Badge from "./Badge";
+
+export interface Props {
+  id: string;
+  title: string;
+  href: string;
+  description: string;
+  imageUrl: {
+    src: string;
+    width: number;
+    height: number;
+    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+  };
+  date: string;
+  category: string;
+}
+
+const { id, title, href, description, imageUrl, date, category } = Astro.props;
+---
+
+<div class="card w-full bg-base-100 shadow-xl">
+  <figure>
+    <Image
+      format="webp"
+      src={imageUrl}
+      alt={title}
+      class="object-cover"
+      transition:name={`img-${id}`}
+    />
+  </figure>
+  <a href={href}>
+    <div class="card-body">
+      <h2 class="card-title">
+        {title}
+        <Badge date={date} client:only="react" />
+      </h2>
+      <p>{description}</p>
+      <div class="card-actions justify-end">
+        <div class="badge badge-outline">{category}</div>
+      </div>
+    </div>
+  </a>
+</div>

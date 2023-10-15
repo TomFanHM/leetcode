@@ -1,11 +1,11 @@
 ---
 import Hero from "../components/Hero.astro";
+import { SyntaxHighlighterComponent } from "../components/SyntaxHighlighterComponent";
 import Layout from "../layout/Layout.astro";
 
-const title = "My Leetcode Blog";
+const title = "Home";
 const description =
   "Discovering the optimal approach to a problem can be an enjoyable quest.";
-const permalink = Astro.url.href;
 
 const twoSumBetterCode = `
   const twoSum = (nums: number[], target: number) => {
@@ -79,45 +79,75 @@ const firstMissingPositiveBetterCode = `
 `;
 ---
 
-<Layout title={title} description={description} permalink={permalink}>
+<Layout title={title} description={description}>
   <Hero />
-  <div class="container mx-auto px-4 py-10 md:py-20">
-    <h1 class="text-3xl font-bold mt-12 md:mt-24 text-center">
-      Discovering the optimal approach to a problem can be an enjoyable quest.
-    </h1>
-    <!-- Two Sum -->
-    <div class="flex flex-col w-full items-center my-12 md:my-24">
-      <h1 class="text-xl font-bold">Two Sum</h1>
-      <p class="py-6">
-        Given an array of integers nums and an integer target, return indices of
-        the two numbers such that they add up to target.
-      </p>
-      <div class="flex flex-col w-full lg:flex-row lg:justify-center">
-        <div class="mockup-code flex-grow lg:max-w-md">
-          <pre class="language-typescript"><code>{twoSumBadCode}</code></pre>
-        </div>
-        <div class="divider lg:divider-horizontal">OR</div>
-        <div class="mockup-code flex-grow lg:max-w-md">
-          <pre class="language-typescript"><code>{twoSumBetterCode}</code></pre>
-        </div>
+  <div class="py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl lg:text-center">
+        <h2 class="text-base font-semibold leading-7 text-primary">
+          Learn faster
+        </h2>
+        <p class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+          Enhance Your Learning Experience
+        </p>
+        <p class="mt-6 text-lg leading-8 text-base-content/70">
+          Discovering the optimal approach to a problem can be an enjoyable
+          quest. Detailed solutions and clear explanations help you grasp
+          complex coding problems with ease.
+        </p>
       </div>
-    </div>
-    <!-- First Missing Positive -->
-    <div class="flex flex-col w-full items-center my-12 md:my-24">
-      <h1 class="text-xl font-bold">First Missing Positive</h1>
-      <p class="py-6">
-        Given an unsorted integer array nums, return the smallest missing
-        positive integer.
-      </p>
-      <div class="flex flex-col w-full lg:flex-row lg:justify-center">
-        <div class="mockup-code flex-grow lg:max-w-md">
-          <pre
-            class="language-typescript"><code>{firstMissingPositiveBetterCode}</code></pre>
-        </div>
-        <div class="divider lg:divider-horizontal">OR</div>
-        <div class="mockup-code flex-grow lg:max-w-md">
-          <pre
-            class="language-typescript"><code>{firstMissingPositiveBadCode}</code></pre>
+      <!-- Code Block -->
+      <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+        <div class="max-w-none">
+          <!-- Two Sum -->
+          <div>
+            <h1 class="text-base font-semibold leading-7 text-center">
+              Two Sum
+            </h1>
+            <p
+              class="mt-4 text-base leading-7 text-base-content/70 text-center"
+            >
+              Given an array of integers nums and an integer target, return
+              indices of the two numbers such that they add up to target.
+            </p>
+            <div class="mt-6 flex flex-col lg:flex-row lg:justify-center">
+              <div class="mockup-code flex-1">
+                <SyntaxHighlighterComponent
+                  codeString={twoSumBadCode}
+                  className="syntax-highlighter"
+                />
+              </div>
+              <div class="divider lg:divider-horizontal">OR</div>
+              <div class="mockup-code flex-1">
+                <SyntaxHighlighterComponent codeString={twoSumBetterCode} />
+              </div>
+            </div>
+          </div>
+          <!-- First Missing Positive -->
+          <div class="mt-24">
+            <h1 class="text-base font-semibold leading-7 text-center">
+              First Missing Positive
+            </h1>
+            <p
+              class="mt-4 text-base leading-7 text-base-content/70 text-center"
+            >
+              Given an unsorted integer array nums, return the smallest missing
+              positive integer.
+            </p>
+            <div class="mt-6 flex flex-col lg:flex-row lg:justify-center">
+              <div class="mockup-code flex-1">
+                <SyntaxHighlighterComponent
+                  codeString={firstMissingPositiveBetterCode}
+                />
+              </div>
+              <div class="divider lg:divider-horizontal">OR</div>
+              <div class="mockup-code flex-1">
+                <SyntaxHighlighterComponent
+                  codeString={firstMissingPositiveBadCode}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
