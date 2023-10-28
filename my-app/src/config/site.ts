@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Tom Fan's LeetCode",
   description:
     "Welcome to our LeetCode sharing website! This website is designed for sharing my solutions and discuss coding problems. Whether you're preparing for a technical interview or just enjoy solving coding challenges, this website is the perfect place for you!",
-  url: "https://leetcode-one.vercel.app/",
+  url: "https://leetcode.tfix.io/",
   author: "Tom Fan",
   ogImage: "/images/opengraph-image.png",
   logo: "/images/logo.png",

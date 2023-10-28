@@ -7,6 +7,6 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://leetcode-one.vercel.app",
-  integrations: [tailwind(), react(), mdx(), sitemap()]
+  site: "https://leetcode.tfix.io",
+  integrations: [tailwind(), react(), mdx(), sitemap()],
 });
