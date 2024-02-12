@@ -1,6 +1,6 @@
 import React from "react";
 
-const Background: React.FC = () => {
+const BackgroundImage: React.FC = () => {
   const polygon = Array.from({ length: 15 }, () => [
     Math.random() * 100,
     Math.random() * 100,
@@ -22,4 +22,4 @@ const Background: React.FC = () => {
     </div>
   );
 };
-export default Background;
+export default BackgroundImage;

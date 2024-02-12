@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import banner from "../assets/banner.png";
-import Background from "../components/background";
+import BackgroundImage from "../components/background-image";
 import List from "../components/list";
 import Sidebar from "../components/sidebar";
 import Layout from "../layout/Layout.astro";
@@ -33,7 +33,7 @@ const tags = articles
 ---
 
 <Layout title={title} description={description}>
-  <Background />
+  <BackgroundImage />
   <section>
     <div class="hero relative mx-auto max-w-6xl overflow-hidden px-4 sm:px-6">
       <div class="hero-content flex-col px-0 lg:flex-row-reverse">
