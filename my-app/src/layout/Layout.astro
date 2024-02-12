@@ -1,7 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Footer from "../components/footer";
+import Header from "../components/header";
 import { siteConfig } from "../config/site";
 import "../styles/global.css";
 
@@ -61,9 +61,9 @@ const { title, description } = Astro.props;
     <!-- Google AdSense -->
   </head>
   <body
-    class="min-h-screen bg-gradient-to-tr from-base-100 to-neutral text-base-content font-sans antialiased"
+    class="font-inter relative min-h-screen bg-base-300 font-sans tracking-tight text-base-content antialiased"
   >
-    <Navbar />
+    <Header client:only="react" />
     <main class="min-h-screen">
       <slot />
     </main>

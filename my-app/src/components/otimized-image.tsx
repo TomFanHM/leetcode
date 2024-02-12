@@ -3,10 +3,14 @@ import { useState } from "react";
 type OptimizedImageProps = {
   src: string;
   alt: string;
-  className: string;
-};
+} & React.ImgHTMLAttributes<HTMLImageElement>;
 
-export default function OptimizedImage(props: OptimizedImageProps) {
+export default function OptimizedImage({
+  src,
+  alt,
+  className,
+  ...props
+}: OptimizedImageProps) {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const [imageError, setImageError] = useState<boolean>(false);
   const handleImageLoad = () => {
@@ -18,12 +22,13 @@ export default function OptimizedImage(props: OptimizedImageProps) {
   };
   return (
     <img
-      src={imageError ? "/fallback.png" : props.src}
-      className={`${props.className} ${imageLoaded ? "" : "animate-loading-skeleton"}`}
+      src={imageError ? "/fallback.png" : src}
+      className={`${className} ${imageLoaded ? "" : "animate-loading-skeleton"}`}
       loading="lazy"
       onLoad={handleImageLoad}
       onError={handleImageError}
-      alt={props.alt}
+      alt={alt}
+      {...props}
     />
   );
 }

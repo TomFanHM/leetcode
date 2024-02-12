@@ -1,155 +1,79 @@
 ---
-import Hero from "../components/Hero.astro";
-import { SyntaxHighlighterComponent } from "../components/SyntaxHighlighterComponent";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import banner from "../assets/banner.png";
+import Background from "../components/background";
+import List from "../components/list";
+import Sidebar from "../components/sidebar";
 import Layout from "../layout/Layout.astro";
+import type { Article } from "../type/type";
 
 const title = "Home";
 const description =
   "Discovering the optimal approach to a problem can be an enjoyable quest.";
 
-const twoSumBetterCode = `
-  const twoSum = (nums: number[], target: number) => {
-    const map = new Map();
-    for (let i = 0; i < nums.length; i++) {
-      const complement = target - nums[i];
-      if (map.has(complement)) {
-        return [map.get(complement), i];
-      }
-      map.set(nums[i], i);
-    }
-  };
-`;
+const docs = await getCollection("articles");
+const articles: { slug: string; data: Article }[] = docs
+  .map((el) => ({
+    slug: el.slug,
+    data: {
+      ...el.data,
+      href: "/articles/" + el.slug,
+    },
+  }))
+  .sort(
+    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+  )
+  .slice(0, 10);
 
-const twoSumBadCode = `
-  const twoSum = (nums: number[], target: number) => {
-    for (let i = 0; i < nums.length; i++) {
-      for (let j = i + 1; j < nums.length; j++) {
-        if (nums[i] + nums[j] === target) return [i, j];
-      }
-    }
-  };
-`;
-
-const firstMissingPositiveBadCode = `
-  const firstMissingPositive = (nums: number[]) => {
-    const sorted: number[] = nums.sort((a: number, b: number) => a - b);
-    let count = 1;
-    let i = 0;
-
-    while (i < sorted.length) {
-      if (sorted[i] === count) {
-        i++;
-        count++;
-      } else if (sorted[i] < count) {
-        i++;
-      } else {
-        return count;
-      }
-    }
-
-    return count;
-  };
-`;
-
-const firstMissingPositiveBetterCode = `
-  const firstMissingPositive = (nums: number[]) => {
-    let j = 0;
-    for (let i = 0; i < nums.length; i++) {
-      if (nums[i] <= 0) {
-        [nums[i], nums[j]] = [nums[j], nums[i]];
-        j++;
-      }
-    }
-
-    for (let i = j; i < nums.length; i++) {
-      const index = Math.abs(nums[i]) - 1 + j;
-      if (index < nums.length && nums[index] > 0) {
-        nums[index] = -nums[index];
-      }
-    }
-
-    for (let i = j; i < nums.length; i++) {
-      if (nums[i] > 0) {
-        return i - j + 1;
-      }
-    }
-
-    return nums.length - j + 1;
-  };
-`;
+const tags = articles
+  .flatMap((article) => article.data.tags)
+  .filter((val, i, arr) => arr.indexOf(val) === i)
+  .sort((a, b) => a.localeCompare(b));
 ---
 
 <Layout title={title} description={description}>
-  <Hero />
-  <div class="py-24 sm:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl lg:text-center">
-        <h2 class="text-base font-semibold leading-7 text-primary">
-          Learn faster
-        </h2>
-        <p class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-          Enhance Your Learning Experience
-        </p>
-        <p class="mt-6 text-lg leading-8 text-base-content/70">
-          Discovering the optimal approach to a problem can be an enjoyable
-          quest. Detailed solutions and clear explanations help you grasp
-          complex coding problems with ease.
-        </p>
+  <Background />
+  <section>
+    <div class="hero relative mx-auto max-w-6xl overflow-hidden px-4 sm:px-6">
+      <div class="hero-content flex-col px-0 lg:flex-row-reverse">
+        <Image
+          src={banner}
+          alt="Leetcode Blog Banner"
+          class="w-full max-w-sm rounded-lg"
+        />
+        <div>
+          <h1 class="text-5xl font-bold">Cracking LeetCode</h1>
+          <p class="py-6">
+            By recording and sharing my answers with you, I'll guide you through
+            the process, helping you build the confidence and skills.
+          </p>
+          <a href="/problems/all">
+            <button class="btn btn-primary">Get Started</button>
+          </a>
+        </div>
       </div>
-      <!-- Code Block -->
-      <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-        <div class="max-w-none">
-          <!-- Two Sum -->
-          <div>
-            <h1 class="text-base font-semibold leading-7 text-center">
-              Two Sum
-            </h1>
-            <p
-              class="mt-4 text-base leading-7 text-base-content/70 text-center"
-            >
-              Given an array of integers nums and an integer target, return
-              indices of the two numbers such that they add up to target.
-            </p>
-            <div class="mt-6 flex flex-col lg:flex-row lg:justify-center">
-              <div class="mockup-code flex-1">
-                <SyntaxHighlighterComponent
-                  codeString={twoSumBadCode}
-                  className="syntax-highlighter"
-                />
-              </div>
-              <div class="divider lg:divider-horizontal">OR</div>
-              <div class="mockup-code flex-1">
-                <SyntaxHighlighterComponent codeString={twoSumBetterCode} />
-              </div>
-            </div>
-          </div>
-          <!-- First Missing Positive -->
-          <div class="mt-24">
-            <h1 class="text-base font-semibold leading-7 text-center">
-              First Missing Positive
-            </h1>
-            <p
-              class="mt-4 text-base leading-7 text-base-content/70 text-center"
-            >
-              Given an unsorted integer array nums, return the smallest missing
-              positive integer.
-            </p>
-            <div class="mt-6 flex flex-col lg:flex-row lg:justify-center">
-              <div class="mockup-code flex-1">
-                <SyntaxHighlighterComponent
-                  codeString={firstMissingPositiveBetterCode}
-                />
-              </div>
-              <div class="divider lg:divider-horizontal">OR</div>
-              <div class="mockup-code flex-1">
-                <SyntaxHighlighterComponent
-                  codeString={firstMissingPositiveBadCode}
-                />
-              </div>
+    </div>
+  </section>
+  <section>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="py-8 md:py-16">
+        <div class="md:flex md:justify-between">
+          <!-- Sidebar -->
+          <Sidebar tags={tags} client:only="react" />
+          <div class="md:grow">
+            <List articles={articles} />
+            <div class="grid w-full place-items-center">
+              <a
+                href="/problems/all"
+                class="btn btn-outline btn-primary btn-block max-w-xl rounded-full"
+              >
+                View More
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </Layout>

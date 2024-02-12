@@ -1,36 +1,43 @@
 ---
 layout: ../../layout/MarkdownLayout.astro
-id: a872b02e
+id: 78
 title: Subsets
-date: May 26, 2023
-author: Tom Fan
-imageUrl: ../../assets/3.png
 description: Given an integer array nums of unique elements, return all possible subsets (the power set).
+date: May 26, 2023
+tags: [Array, Backtracking, Bit Manipulation]
+difficulty: Medium
 draft: false
-category: Array
 ---
 
-### Problem
+## Problem
 
 Given an integer array nums of unique elements, return all possible subsets (the power set).
 
 The solution set must not contain duplicate subsets. Return the solution in any order.
 
-#### Case 1
+### Case 1
 
 ```
 Input: nums = [1,2,3]
 Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 ```
 
-#### Case 2
+### Case 2
 
 ```
 Input: nums = [0]
 Output: [[],[0]]
 ```
 
-### Solution
+### Constraints
+
+```
+1 <= nums.length <= 10
+-10 <= nums[i] <= 10
+All the numbers of nums are unique.
+```
+
+## Solution
 
 The solution is based on the idea that we can generate all subsets by iteratively adding each element of the array.
 

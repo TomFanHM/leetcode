@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import List from "../../../../components/list";
+import Sidebar from "../../../../components/sidebar";
+import Layout from "../../../../layout/Layout.astro";
+import type { Article } from "../../../../type/type";
+import { capitalizeFirstLetter } from "../../../../utils/utils";
+
+export async function getStaticPaths() {
+  const difficulties = ["easy", "medium", "hard", "all"];
+  const docs = await getCollection("articles");
+  const tags = docs
+    .flatMap((doc) => doc.data.tags)
+    .map((tag) => tag.toLowerCase().split(" ").join("-"));
+
+  const temp: Record<"params", { difficulty: string; topic: string }>[] = [];
+
+  difficulties.forEach((difficulty) => {
+    tags.forEach((tag) => {
+      temp.push({
+        params: {
+          difficulty: difficulty,
+          topic: tag,
+        },
+      });
+    });
+  });
+
+  return temp;
+}
+
+const { topic, difficulty } = Astro.params;
+
+const title = `${capitalizeFirstLetter(difficulty)} Problems | ${topic}`;
+
+const docs = await getCollection("articles");
+const articles: { slug: string; data: Article }[] = docs
+  .map((el) => ({
+    slug: el.slug,
+    data: {
+      ...el.data,
+      href: "/articles/" + el.slug,
+    },
+  }))
+  .sort(
+    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+  );
+
+const filteredDifficulty =
+  difficulty === "all"
+    ? articles
+    : articles.filter(
+        (article) =>
+          article.data.difficulty === capitalizeFirstLetter(difficulty),
+      );
+const related = filteredDifficulty.filter((article) =>
+  article.data.tags.includes(
+    topic
+      .split("-")
+      .map((el) => capitalizeFirstLetter(el))
+      .join(" "),
+  ),
+);
+
+const tags = articles
+  .flatMap((article) => article.data.tags)
+  .filter((val, i, arr) => arr.indexOf(val) === i)
+  .sort((a, b) => a.localeCompare(b));
+---
+
+<Layout title={title}>
+  <section>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="py-8 md:py-16">
+        <div class="md:flex md:justify-between">
+          <!-- Sidebar -->
+          <Sidebar tags={tags} client:only="react" />
+          <div class="md:grow">
+            <List articles={related} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
