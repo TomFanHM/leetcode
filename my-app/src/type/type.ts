@@ -7,3 +7,5 @@ export type Article = {
   tags: string[];
   difficulty: "Easy" | "Medium" | "Hard";
 };
+
+export type ArticlesArray = { slug: string; data: Article }[];

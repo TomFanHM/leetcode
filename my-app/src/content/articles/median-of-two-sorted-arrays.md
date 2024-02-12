@@ -4,7 +4,7 @@ id: 4
 title: Median of Two Sorted Arrays
 description: Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
 date: Feb 12, 2024
-tags: [Array, Binary Search, Divide and Conquer]
+tags: [Array, Binary Search, Divide And Conquer]
 difficulty: Hard
 draft: false
 ---

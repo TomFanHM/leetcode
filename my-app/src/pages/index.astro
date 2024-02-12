@@ -1,39 +1,21 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
 import banner from "../assets/banner.png";
-import BackgroundImage from "../components/background-image";
 import List from "../components/list";
 import Sidebar from "../components/sidebar";
 import Layout from "../layout/Layout.astro";
-import type { Article } from "../type/type";
+import { getArticles, getTags, sortArticlesByDate } from "../utils/utils";
 
 const title = "Home";
 const description =
   "Discovering the optimal approach to a problem can be an enjoyable quest.";
 
-const docs = await getCollection("articles");
-const articles: { slug: string; data: Article }[] = docs
-  .map((el) => ({
-    slug: el.slug,
-    data: {
-      ...el.data,
-      href: "/articles/" + el.slug,
-    },
-  }))
-  .sort(
-    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-  )
-  .slice(0, 10);
+const articles = await getArticles().then((el) => sortArticlesByDate(el));
 
-const tags = articles
-  .flatMap((article) => article.data.tags)
-  .filter((val, i, arr) => arr.indexOf(val) === i)
-  .sort((a, b) => a.localeCompare(b));
+const tags = getTags(articles);
 ---
 
 <Layout title={title} description={description}>
-  <BackgroundImage />
   <section>
     <div class="hero relative mx-auto max-w-6xl overflow-hidden px-4 sm:px-6">
       <div class="hero-content flex-col px-0 lg:flex-row-reverse">
@@ -62,7 +44,7 @@ const tags = articles
           <!-- Sidebar -->
           <Sidebar tags={tags} client:only="react" />
           <div class="md:grow">
-            <List articles={articles} />
+            <List articles={articles.slice(0, 10)} header="Latest Articles" />
             <div class="grid w-full place-items-center">
               <a
                 href="/problems/all"

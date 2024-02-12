@@ -1,49 +1,34 @@
 ---
-import { getCollection } from "astro:content";
 import List from "../../../components/list";
 import Sidebar from "../../../components/sidebar";
 import Layout from "../../../layout/Layout.astro";
-import type { Article } from "../../../type/type";
-import { capitalizeFirstLetter } from "../../../utils/utils";
+import {
+  capitalizeFirstLetter,
+  filterArticles,
+  getArticles,
+  getTags,
+  sortArticlesByDate,
+} from "../../../utils/utils";
 
 export function getStaticPaths() {
-  return [
-    { params: { difficulty: "easy" } },
-    { params: { difficulty: "medium" } },
-    { params: { difficulty: "hard" } },
-    { params: { difficulty: "all" } },
-  ];
+  const arr = ["easy", "medium", "hard", "all"] as const;
+  return arr.map((el) => ({
+    params: { difficulty: el },
+  }));
 }
 
 const { difficulty } = Astro.params;
 
 const title = `${capitalizeFirstLetter(difficulty)} Problems`;
 
-const docs = await getCollection("articles");
-const articles: { slug: string; data: Article }[] = docs
-  .map((el) => ({
-    slug: el.slug,
-    data: {
-      ...el.data,
-      href: "/articles/" + el.slug,
-    },
-  }))
-  .sort(
-    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-  );
+const articles = await getArticles().then((el) => sortArticlesByDate(el));
 
-const related =
-  difficulty === "all"
-    ? articles
-    : articles.filter(
-        (article) =>
-          article.data.difficulty === capitalizeFirstLetter(difficulty),
-      );
+const tags = getTags(articles);
 
-const tags = articles
-  .flatMap((article) => article.data.tags)
-  .filter((val, i, arr) => arr.indexOf(val) === i)
-  .sort((a, b) => a.localeCompare(b));
+const related = filterArticles(articles, {
+  difficulty: difficulty,
+  topic: null,
+});
 ---
 
 <Layout title={title}>
@@ -54,7 +39,10 @@ const tags = articles
           <!-- Sidebar -->
           <Sidebar tags={tags} client:only="react" />
           <div class="md:grow">
-            <List articles={related} />
+            <List
+              articles={related}
+              header={`# ${capitalizeFirstLetter(difficulty)}`}
+            />
           </div>
         </div>
       </div>
