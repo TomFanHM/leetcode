@@ -65,35 +65,26 @@ function addTwoNumbers(
   l2: ListNode | null,
 ): ListNode | null {
   let carry = 0;
-  let node = l1;
-  let prev = null;
+  let dummyHead = new ListNode(0);
+  let current = dummyHead;
 
-  while (l1 && l2) {
-    let sum = l1.val + l2.val + carry;
-    carry = sum >= 10 ? 1 : 0;
-    l1.val = sum % 10;
-    prev = l1;
-    l1 = l1.next;
-    l2 = l2.next;
+  while (l1 !== null || l2 !== null) {
+    let x = l1 !== null ? l1.val : 0;
+    let y = l2 !== null ? l2.val : 0;
+    let sum = carry + x + y;
+    carry = Math.floor(sum / 10);
+    current.next = new ListNode(sum % 10);
+    current = current.next;
+    if (l1 !== null) l1 = l1.next;
+    if (l2 !== null) l2 = l2.next;
   }
 
-  if (l2) {
-    prev.next = l2;
-    l1 = l2;
+  if (carry > 0) {
+    current.next = new ListNode(carry);
   }
 
-  while (carry && l1) {
-    let sum = l1.val + carry;
-    carry = sum >= 10 ? 1 : 0;
-    l1.val = sum % 10;
-    prev = l1;
-    l1 = l1.next;
-  }
-
-  if (carry) {
-    prev.next = new ListNode(1);
-  }
-
-  return node;
+  return dummyHead.next;
 }
 ```
+
+This solution uses the elementary math approach to add two numbers digit by digit. We iterate through both linked lists simultaneously, adding corresponding digits along with any carry from the previous digit addition. If one list is longer than the other, we continue the process with the longer list. A dummy head node is used to simplify the code and handle the case where a new digit is added to the result list. The carry variable is used to keep track of the carryover value for each digit addition.

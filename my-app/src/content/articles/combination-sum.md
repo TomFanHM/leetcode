@@ -59,39 +59,46 @@ All elements of candidates are distinct.
 
 ```typescript
 function combinationSum(candidates: number[], target: number): number[][] {
-  const stack = [];
+  const result: number[][] = [];
+  // Sort candidates to help with early stopping
   candidates.sort((a, b) => a - b);
 
-  function backtrack(start: number, arr: number[], sum: number) {
-    if (sum === target) {
-      stack.push([...arr]);
+  function backtrack(
+    start: number,
+    combination: number[],
+    remainingTarget: number,
+  ) {
+    if (remainingTarget === 0) {
+      // If the remaining target is 0, we found a valid combination
+      result.push([...combination]);
       return;
     }
     for (let i = start; i < candidates.length; i++) {
-      const newSum = sum + candidates[i];
-      if (newSum > target) break;
-      arr.push(candidates[i]);
-      backtrack(i, arr, newSum);
-      arr.pop();
+      if (candidates[i] > remainingTarget) break; // Early stop if the candidate exceeds the remaining target
+      combination.push(candidates[i]);
+      // Recurse with the current number included, decrementing the remaining target
+      backtrack(i, combination, remainingTarget - candidates[i]);
+      combination.pop(); // Backtrack
     }
   }
 
-  backtrack(0, [], 0);
-  return stack;
+  backtrack(0, [], target);
+  return result;
 }
 ```
 
-This function first creates an empty stack array to store the combinations.
-The candidates array is sorted in ascending order using the sort function to optimize the backtracking algorithm.
+Sorting: First, the candidates are sorted to ensure that we can stop early in our recursion when we reach a sum that exceeds the target.
 
-The backtrack function is defined to perform the recursive backtracking algorithm with three parameters: start, arr, and sum. start represents the index of the candidates array from where the current iteration should start. arr is an array that stores the current combination of numbers, and sum is the current sum of the numbers in arr.
+Backtracking Function: The core of the solution is the backtrack function, which takes the current start index in the candidates array, the current combination of numbers, and the remaining target to achieve.
 
-If sum equals target, the current combination in arr is pushed to the stack array, and the function returns.
+If the remaining target is 0, we've found a valid combination and add a copy of it to our result list.
 
-Otherwise, a for loop is used to iterate through the candidates array starting from the start index. For each element, the new sum is calculated by adding the current element with the sum.
+We iterate through the candidates, starting from the current index to avoid duplicates and maintain the uniqueness of combinations.
 
-If the new sum is greater than the target, the loop is broken as it is impossible to form a valid combination.
+For each candidate, if adding it to the current sum exceeds the target, we stop exploring further as the candidates are sorted in ascending order.
 
-Otherwise, the current element is added to the arr, and the backtrack function is called recursively with the updated start, arr, and newSum values.
+If it doesn't exceed, we add the candidate to the current combination and recursively call backtrack with the updated parameters.
 
-After the recursive call returns, the last element is removed from arr using the pop function to backtrack to the previous state and explore other possibilities.
+After exploring all possibilities with the current candidate, we remove it from our combination (backtrack) to explore the next candidate.
+
+This approach systematically explores all combinations, ensuring all unique combinations that sum up to the target are found, utilizing the concept of backtracking to explore each possibility and backtrack once it's either found to be successful or leads to a dead end.

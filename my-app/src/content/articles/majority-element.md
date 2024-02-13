@@ -41,14 +41,20 @@ n == nums.length
 
 ```typescript
 function majorityElement(nums: number[]): number {
-  const map = {};
-  for (let i = 0; i < nums.length; i++) {
-    if (!map[nums[i]]) {
-      map[nums[i]] = 1;
-    } else {
-      map[nums[i]] += 1;
-    }
-    if (map[nums[i]] > nums.length / 2) return nums[i];
+  const countMap: Record<number, number> = {}; // Create a hash map to store counts
+  for (let num of nums) {
+    if (!countMap[num]) countMap[num] = 0;
+    countMap[num]++;
+    // Check if the current number has become the majority element
+    if (countMap[num] > nums.length / 2) return num;
   }
 }
 ```
+
+Counting: Iterate through each element in the array, counting occurrences using a hash map.
+
+Immediate Return: As soon as an element's count exceeds n / 2, it is returned as the majority element.
+
+Assumption Validation: The problem statement guarantees the existence of a majority element, allowing for this early return logic without needing to iterate through the entire array or map.
+
+Complexity: The time complexity is O(n) due to a single pass through the array, and the space complexity is O(n) for storing the counts, although in practice, it's often much less than n due to early termination.
