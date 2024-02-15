@@ -1,4 +1,5 @@
 ---
+import Giscus from "@giscus/react";
 import { getCollection, type CollectionEntry } from "astro:content";
 import Card from "../../components/card";
 import RelatedPosts from "../../components/related-posts";
@@ -52,7 +53,24 @@ const articles: { slug: string; data: Article }[] = docs
               <Content />
             </div>
             <!-- Comments -->
-            <!-- <div class="mb-8"></div> -->
+            <div class="mb-8">
+              <Giscus
+                id={slug}
+                repo="TomFanHM/leetcode"
+                repoId="R_kgDOJmyJww"
+                category="Comments"
+                categoryId="DIC_kwDOJmyJw84CdO9l"
+                mapping="url"
+                term="Welcome!"
+                reactionsEnabled="1"
+                emitMetadata="0"
+                inputPosition="top"
+                theme="preferred_color_scheme"
+                lang="en"
+                loading="lazy"
+                client:only="react"
+              />
+            </div>
             <!-- Related -->
             <RelatedPosts articles={articles} />
           </div>
