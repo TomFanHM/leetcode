@@ -38,6 +38,10 @@ const articles: { slug: string; data: Article }[] = docs
   )
   .sort((a, b) => a.data.id - b.data.id)
   .slice(0, 5);
+
+const repo = import.meta.env.REPO;
+const repoId = import.meta.env.REPO_ID;
+const categoryId = import.meta.env.CATEGORY_ID;
 ---
 
 <Layout title={data.title} description={data.description}>
@@ -56,16 +60,16 @@ const articles: { slug: string; data: Article }[] = docs
             <div class="mb-8">
               <Giscus
                 id={slug}
-                repo="TomFanHM/leetcode"
-                repoId="R_kgDOJmyJww"
+                repo={repo}
+                repoId={repoId}
                 category="Comments"
-                categoryId="DIC_kwDOJmyJw84CdO9l"
+                categoryId={categoryId}
                 mapping="url"
                 term="Welcome!"
                 reactionsEnabled="1"
                 emitMetadata="0"
                 inputPosition="top"
-                theme="preferred_color_scheme"
+                theme="cobalt"
                 lang="en"
                 loading="lazy"
                 client:only="react"
